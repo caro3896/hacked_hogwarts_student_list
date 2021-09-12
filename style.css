@@ -37,12 +37,24 @@ h3 {
   margin-left: 0;
 }
 
-#filter {
+button.filter {
   border: 1px solid #decba2;
   border-radius: 10px;
   cursor: pointer;
   background-color: black;
   color: white;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+button.filter:hover {
+  background-color: #decba2;
+  color: black;
+}
+
+button.filter:focus {
+  background-color: #decba2;
+  color: black;
 }
 
 /* Students overview */
