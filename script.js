@@ -12,7 +12,7 @@ let Student = {
    nickName: "",
    image: "",
    house: ""
-}
+};
 
 let firstName;
 let middleName;
@@ -24,8 +24,14 @@ let house;
 function start(){
     console.log("DOM is loaded");
     loadJSON();
+    addEventListeners();
 }
 
+function addEventListeners(){
+    document.querySelector("#filter").addEventListener("change", selectFilter);
+}
+
+// Load json
 async function loadJSON(){
     const respons = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
     const jsonData = await respons.json();
@@ -34,21 +40,27 @@ async function loadJSON(){
     prepareObjects(jsonData);
 }
 
+// Prepare data objects
 function prepareObjects(jsonData){
-jsonData.forEach(element => {
+    allStudents = jsonData.map(preapareObject);
+    displayList(allStudents);
+}
+
+function preapareObject(jsonData){
     const student = Object.create(Student);
 
-    student.firstName = getFirstName(element.fullname);
-    student.lastName = getLastName(element.fullname);
-    student.middleName = getMidddelName(element.fullname);
-    student.nickName = getNickName(element.fullname);
-    student.image = getImage(element.fullname);
-    student.house = element.house.trim();
+    student.firstName = getFirstName(jsonData.fullname);
+    student.lastName = getLastName(jsonData.fullname);
+    student.middleName = getMidddelName(jsonData.fullname);
+    student.nickName = getNickName(jsonData.fullname);
+    student.image = getImage(jsonData.fullname);
+    student.house = jsonData.house.trim();
     student.house = student.house.substring(0,1).toUpperCase() + student.house.substring(1).toLowerCase();
-    allStudents.push(student);
-});
-displayList(allStudents);}
+    
+    return student;
+}
 
+// Get firstname
 function getFirstName(fullname){
     firstName = fullname.trim();
     if (fullname.includes(" ")) {
@@ -104,7 +116,39 @@ function getNickName(fullname){
      return image;
  }
 
+ // Filtering
+function selectFilter(event){
+    const selectedFilter = event.target.value;
+    console.log(selectedFilter);
+    filterList(selectedFilter);
+}
+
+function filterList(filterBy){
+    let filteredList = allStudents;
+
+    if (filterBy === "gryffindor"){
+        filteredList = allStudents.filter(isGryffindor);
+    } else {
+
+    }
+    displayList(filteredList);
+}
+
+function isGryffindor(student){
+    console.log("hello gryffindor");
+    return student.house === "gryffindor";
+}
+
+// Displaying filtered list
+function displayList(student){
+    //clear the list
+    document.querySelector("#students").innerHTML = "";
+    //build new list
+    student.forEach(displayStudent(student));
+}
+
 function displayList(students){
+    console.log("Hello there");
     // Clear the list 
     document.querySelector("#students").innerHTML = "";
 
@@ -113,6 +157,7 @@ function displayList(students){
 }
 
 function displayStudent(student){
+    console.log("Hello again");
     // Create clone
     const clone = document.querySelector("template#student").content.cloneNode(true);
    
