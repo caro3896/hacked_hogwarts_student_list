@@ -11,13 +11,41 @@ body {
 }
 
 h1 {
-  font-size: 1.5em;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  margin: 20px;
 }
 
 h2 {
+  font-size: 1.5em;
+}
+
+h3 {
   font-size: 1.2em;
 }
 
+/* Filtering */
+
+.filtering {
+  display: flex;
+  margin: 20px;
+}
+.filtering p {
+  color: white;
+  margin: 10px;
+  margin-left: 0;
+}
+
+#filter {
+  border: 1px solid #decba2;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+/* Students overview */
 #students {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -47,7 +75,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Pop-up */
+/* Pop-up - details */
 #popup {
   position: fixed;
   top: 50%;

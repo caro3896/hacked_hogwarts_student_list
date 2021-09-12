@@ -10,13 +10,15 @@
 <body>
 <header>
     <h1>Hogwarts student list</h1>
-    <p>Filter by</p>
-    <select id="filter">
-        <option value="gryffindor">Gryffindor</option>
-        <option value="hufflepuff">Hufflepuff</option>
-        <option value="ravenclaw">Ravenclaw</option>
-        <option value="slytherin">Slytherin</option>
-      </select>
+    <div class="filtering">
+        <p>Filter by:</p>
+        <select id="filter">
+            <option value="gryffindor">Gryffindor</option>
+            <option value="hufflepuff">Hufflepuff</option>
+            <option value="ravenclaw">Ravenclaw</option>
+            <option value="slytherin">Slytherin</option>
+          </select></div>
+    
 </header>
 
     <section id="students"></section>
@@ -25,10 +27,10 @@
 
     <template id="student">
         <article class="studentinfo">
-            <h1 data-field="firstname" class="name"></h1>
-            <h1 data-field="lastname" class="name"></h1>
+            <h2 data-field="firstname" class="name"></h2>
+            <h2 data-field="lastname" class="name"></h2>
             <img data-field="image" class="image" src="" alt="">
-            <h2 data-field="house"></h2>
+            <h3 data-field="house"></h3>
         </article>
     </template>
 
