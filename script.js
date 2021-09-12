@@ -28,7 +28,9 @@ function start(){
 }
 
 function addEventListeners(){
-    document.querySelector("#filter").addEventListener("change", selectFilter);
+    document.querySelectorAll("[data-action='filter']").forEach(button => {
+        button.addEventListener("click", selectFilter);
+    })
 }
 
 // Load json
@@ -118,7 +120,7 @@ function getNickName(fullname){
 
  // Filtering
 function selectFilter(event){
-    const selectedFilter = event.target.value;
+    const selectedFilter = event.target.dataset.filter;
     console.log(selectedFilter);
     filterList(selectedFilter);
 }
@@ -128,15 +130,30 @@ function filterList(filterBy){
 
     if (filterBy === "gryffindor"){
         filteredList = allStudents.filter(isGryffindor);
-    } else {
-
+    } else if (filterBy === "hufflepuff"){
+        filteredList = allStudents.filter(isHufflepuff);
+    } else if (filterBy === "ravenclaw"){
+        filteredList = allStudents.filter(isRavenclaw);
+    } else if (filterBy === "slytherin"){
+        filteredList = allStudents.filter(isSlytherin);
     }
     displayList(filteredList);
 }
 
 function isGryffindor(student){
-    console.log("hello gryffindor");
-    return student.house === "gryffindor";
+    return student.house === "Gryffindor";
+}
+
+function isHufflepuff(student){
+    return student.house === "Hufflepuff";
+}
+
+function isRavenclaw(student){
+    return student.house === "Ravenclaw";
+}
+
+function isSlytherin(student){
+    return student.house === "Slytherin";
 }
 
 // Displaying filtered list

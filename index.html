@@ -12,14 +12,18 @@
     <h1>Hogwarts student list</h1>
     <div class="filtering">
         <p>Filter by:</p>
-        <select id="filter">
+        <button class="filter" data-action="filter" data-filter="all">All</button>
+        <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+        <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+        <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+        <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+        <!-- <select id="filter">
             <option value="all">All</option>
             <option value="gryffindor">Gryffindor</option>
             <option value="hufflepuff">Hufflepuff</option>
             <option value="ravenclaw">Ravenclaw</option>
             <option value="slytherin">Slytherin</option>
-          </select></div>
-    
+          </select></div> -->
 </header>
 
     <section id="students"></section>
