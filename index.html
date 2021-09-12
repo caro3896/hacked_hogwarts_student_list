@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Hogwarts Studentlist</title>
+</head>
+<body>
+    <section id="students"></section>
+
+    <div id="popup"></div>
+
+    <template id="student">
+        <article class="studentinfo">
+            <img data-field="image" class="image" src="" alt="">
+            <p data-field="name" class="name"></p>
+        </article>
+    </template>
+
+    <template id="info">
+        <div class="popup_header">
+            <p data-field="name" class="fullname"></p>
+            <button id="close">&times;</button>
+            </div>
+            <p data-field="house" class="house"></p>
+    </template>
+
+    <div id="overlay"></div>
+    <script src="script.js"></script>
+</body>
+</html>
