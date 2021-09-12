@@ -1,15 +1,51 @@
-#students {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Generel */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-/* .student {
+body {
+  background-color: black;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+#students {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  text-align: center;
+}
+
+.studentinfo {
+  width: 200px;
+  height: 300px;
+  margin: 0 auto;
+  border: 1px solid #decba2;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%);
+}
+
+.name:first-child {
+  margin-top: 20px;
+}
+
+.name:nth-child(2) {
   margin-bottom: 20px;
 }
 
-.name {
-  cursor: pointer;
-} */
+.image {
+  margin-bottom: 20px;
+}
 
 /* Pop-up */
 #popup {
@@ -18,10 +54,10 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
-  border: 1px solid black;
+  border: 1px solid #decba2;
   border-radius: 10px;
   z-index: 10;
-  background-color: white;
+  background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%);
   width: 500px;
   max-width: 80%;
 }
@@ -30,24 +66,24 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
-.popup_header {
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-}
-
-.popup_header .close {
+#close {
   cursor: pointer;
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.25rem;
   font-weight: bold;
+  float: right;
+  margin: 10px;
+  font-size: 1.5em;
+  border: none;
+  background-color: transparent;
 }
 
-.house {
+#popup .image {
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infotext {
   padding: 10px 15px;
 }
 
