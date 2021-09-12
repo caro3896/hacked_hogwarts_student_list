@@ -118,7 +118,9 @@ function displayStudent(student){
    
     //Set clone data
     clone.querySelector("[data-field=image]").src = student.image;
-    clone.querySelector("[data-field=name]").textContent = student.name;
+    clone.querySelector("[data-field=firstname]").textContent = student.firstName;
+    clone.querySelector("[data-field=lastname]").textContent = student.lastName;
+    clone.querySelector("[data-field=house]").textContent = student.house;
 
     //Make clickable to see more details
     clone.querySelector(".studentinfo").addEventListener("click", () => showDetails(student));
@@ -130,8 +132,13 @@ function displayStudent(student){
 function showDetails(student){
     const clone = document.querySelector("#info").cloneNode(true).content;
     popup.textContent="";
-    clone.querySelector(".fullname").textContent = student.fullname;
-    clone.querySelector(".house").textContent = `House: ${student.house}`;
+    clone.querySelector("[data-field=image]").src = student.image;
+    clone.querySelector("[data-field=firstname]").textContent = `Firstname: ${student.firstName}`;
+    clone.querySelector("[data-field=middelname]").textContent = `Middelname: ${student.middelName}`;
+    clone.querySelector("[data-field=nickname]").textContent = `Nickname: ${student.nickName}`;
+    clone.querySelector("[data-field=lastname]").textContent = `Lastname: ${student.lastName}`;
+    clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status:`;
+    clone.querySelector("[data-field=house]").textContent = `House: ${student.house}`;
     popup.classList.add('active');
     overlay.classList.add('active');
     clone.querySelector("#close").addEventListener("click", closeDetails);
