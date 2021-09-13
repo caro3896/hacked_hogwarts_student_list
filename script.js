@@ -31,6 +31,10 @@ function addEventListeners(){
     document.querySelectorAll("[data-action='filter']").forEach(button => {
         button.addEventListener("click", selectFilter);
     })
+    document.querySelectorAll("[data-action='sort']").forEach(button => {
+        button.addEventListener("click", selectSorting);
+    })
+
 }
 
 // Load json
@@ -43,23 +47,20 @@ async function loadJSON(){
 }
 
 // Prepare data objects
-function prepareObjects(jsonData){
-    allStudents = jsonData.map(preapareObject);
-    displayList(allStudents);
-}
-
-function preapareObject(jsonData){
-    const student = Object.create(Student);
-
-    student.firstName = getFirstName(jsonData.fullname);
-    student.lastName = getLastName(jsonData.fullname);
-    student.middleName = getMidddelName(jsonData.fullname);
-    student.nickName = getNickName(jsonData.fullname);
-    student.image = getImage(jsonData.fullname);
-    student.house = jsonData.house.trim();
-    student.house = student.house.substring(0,1).toUpperCase() + student.house.substring(1).toLowerCase();
+function prepareObjects(students){
+    students.forEach(element => {
+        const student = Object.create(Student);
     
-    return student;
+        student.firstName = getFirstName(element.fullname);
+        student.lastName = getLastName(element.fullname);
+        student.middleName = getMidddelName(element.fullname);
+        student.nickName = getNickName(element.fullname);
+        student.image = getImage(element.fullname);
+        student.house = element.house.trim();
+        student.house = student.house.substring(0,1).toUpperCase() + student.house.substring(1).toLowerCase();
+        allStudents.push(student);
+    });
+    displayList(allStudents);
 }
 
 // Get firstname
@@ -114,14 +115,20 @@ function getNickName(fullname){
 // }
 
  function getImage(fullname){
-     image = `./images/${lastName.toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
+    if (lastName === 'Patil') {
+        image = `./images/${lastName.toLowerCase()}_${firstName.toLowerCase()}.png`;
+      } else if (firstName === 'Leanne') {
+        image = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'
+      }
+      else {
+        image = `./images/${lastName.toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
+      }
      return image;
  }
 
  // Filtering
 function selectFilter(event){
     const selectedFilter = event.target.dataset.filter;
-    console.log(selectedFilter);
     filterList(selectedFilter);
 }
 
@@ -157,15 +164,7 @@ function isSlytherin(student){
 }
 
 // Displaying filtered list
-function displayList(student){
-    //clear the list
-    document.querySelector("#students").innerHTML = "";
-    //build new list
-    student.forEach(displayStudent(student));
-}
-
 function displayList(students){
-    console.log("Hello there");
     // Clear the list 
     document.querySelector("#students").innerHTML = "";
 
@@ -173,8 +172,42 @@ function displayList(students){
     students.forEach(displayStudent);
 }
 
+// Sorting 
+function selectSorting(event){
+    console.log("Sorting");
+    const selectedSorting = event.target.dataset.sort;
+    sortList(selectedSorting);
+    console.log(selectedSorting);
+}
+
+function sortList(sortBy){
+    let sortedList = allStudents;
+    if (sortBy === "firstname"){
+        sortedList = sortedList.sort(sortByFirstname);
+    } else if (sortBy === "lastname"){
+        sortedList = sortedList.sort(sortByLastname);
+    } 
+    displayList(sortedList);
+}
+
+function sortByFirstname(nameA, nameB){
+    if (nameA.firstName < nameB.firstName){
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+function sortByLastname(nameA, nameB){
+    if (nameA.lastName < nameB.lastName){
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+
 function displayStudent(student){
-    console.log("Hello again");
     // Create clone
     const clone = document.querySelector("template#student").content.cloneNode(true);
    
@@ -211,3 +244,5 @@ function closeDetails(){
     popup.classList.remove('active');
     overlay.classList.remove('active');
 }
+
+

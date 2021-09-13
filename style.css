@@ -25,13 +25,23 @@ h3 {
   font-size: 1.2em;
 }
 
-/* Filtering */
+/* Filtering/sorting */
 
 .filtering {
   display: flex;
-  margin: 20px;
+  margin-left: 20px;
 }
 .filtering p {
+  color: white;
+  margin: 10px;
+  margin-left: 0;
+}
+
+.sorting {
+  display: flex;
+  margin-left: 20px;
+}
+.sorting p {
   color: white;
   margin: 10px;
   margin-left: 0;
@@ -63,6 +73,7 @@ button.filter:focus {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
   text-align: center;
+  margin: 20px;
 }
 
 .studentinfo {
@@ -85,6 +96,7 @@ button.filter:focus {
 
 .image {
   margin-bottom: 20px;
+  width: 50%;
 }
 
 /* Pop-up - details */
