@@ -15,6 +15,11 @@ let Student = {
    expelled: false
 };
 
+const settings = {
+    filter: "all",
+    sortBy: "house"
+}
+
 let firstName;
 let middleName;
 let lastName;
@@ -52,7 +57,6 @@ function prepareObjects(students){
     students.forEach(element => {
         const student = Object.create(Student);
     
-        /* HUSK AT RETTE ... MÅSKE */
         student.firstName = getFirstName(element.fullname);
         student.lastName = getLastName(element.fullname);
         student.middleName = getMidddelName(element.fullname);
@@ -130,23 +134,27 @@ function getNickName(fullname){
 
  // Filtering
 function selectFilter(event){
-    const selectedFilter = event.target.dataset.filter;
-    filterList(selectedFilter);
+    const filter = event.target.dataset.filter;
+    setFilter(filter);
 }
 
-function filterList(filterBy){
-    let filteredList = allStudents;
+function setFilter(filter){
+    settings.filterBy = filter;
+    buildList();
+}
 
-    if (filterBy === "gryffindor"){
+function filterList(filteredList){
+
+    if (settings.filterBy === "gryffindor"){
         filteredList = allStudents.filter(isGryffindor);
-    } else if (filterBy === "hufflepuff"){
+    } else if (settings.filterBy === "hufflepuff"){
         filteredList = allStudents.filter(isHufflepuff);
-    } else if (filterBy === "ravenclaw"){
+    } else if (settings.filterBy === "ravenclaw"){
         filteredList = allStudents.filter(isRavenclaw);
-    } else if (filterBy === "slytherin"){
+    } else if (settings.filterBy === "slytherin"){
         filteredList = allStudents.filter(isSlytherin);
     }
-    displayList(filteredList);
+    return filteredList;
 }
 
 function isGryffindor(student){
@@ -165,6 +173,38 @@ function isSlytherin(student){
     return student.house === "Slytherin";
 }
 
+// Sorting 
+
+function selectSorting(event){
+    const sortBy = event.target.dataset.sort;
+    setSort(sortBy);
+}
+
+function setSort(sortBy){
+    settings.sortBy = sortBy;
+    buildList();
+}
+
+function sortList(sortedList){
+    sortedList.sort(sortByProperty);
+    
+    function sortByProperty(nameA, nameB){
+        if (nameA[settings.sortBy] < nameB[settings.sortBy]){
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+    return sortedList;
+}
+
+function buildList(){
+    const currentList = filterList(allStudents);
+    const sortedList = sortList(currentList);
+
+    displayList(sortedList);
+}
+
 // Displaying filtered list
 function displayList(students){
     // Clear the list 
@@ -172,27 +212,6 @@ function displayList(students){
 
     // Build a new list
     students.forEach(displayStudent);
-}
-
-// Sorting 
-
-function selectSorting(event){
-    const selectedSorting = event.target.dataset.sort;
-    sortList(selectedSorting);
-}
-
-function sortList(sortBy){
-    let sortedList = allStudents;
-    sortedList.sort(sortByProperty);
-    
-    function sortByProperty(nameA, nameB){
-        if (nameA[sortBy] < nameB[sortBy]){
-            return -1;
-        } else {
-            return 1;
-        }
-    }
-    displayList(sortedList);
 }
 
 function displayStudent(student){
