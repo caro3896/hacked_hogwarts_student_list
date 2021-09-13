@@ -11,7 +11,8 @@ let Student = {
    middleName: "",
    nickName: "",
    image: "",
-   house: ""
+   house: "",
+   expelled: false
 };
 
 let firstName;
@@ -220,6 +221,9 @@ function displayStudent(student){
     //Make clickable to see more details
     clone.querySelector(".studentinfo").addEventListener("click", () => showDetails(student));
 
+    //Expell student
+    clone.querySelector(".expell").addEventListener("click", () => expellOrUnExpell(expell, student));
+
     //Append clone to list
     document.querySelector("#students").appendChild(clone);
 }
@@ -245,4 +249,27 @@ function closeDetails(){
     overlay.classList.remove('active');
 }
 
+function expell(student){
+    return student.expelled = true;
+}
 
+function unExpell(student){
+    return student.expelled = false;
+}
+
+function expellOrUnExpell(action, student){
+    action(student);
+}
+
+
+// function hire(person){
+//     person.hired = true;
+// }
+
+// function fire(person){
+//     person.hired = false;
+// }
+
+// function hireOrFire(action, person){
+//     action(person);
+// }

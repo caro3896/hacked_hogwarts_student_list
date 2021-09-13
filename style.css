@@ -99,6 +99,10 @@ button.filter:focus {
   width: 50%;
 }
 
+.expell {
+  z-index: 4;
+}
+
 /* Pop-up - details */
 #popup {
   position: fixed;
