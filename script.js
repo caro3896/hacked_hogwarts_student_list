@@ -52,6 +52,7 @@ function prepareObjects(students){
     students.forEach(element => {
         const student = Object.create(Student);
     
+        /* HUSK AT RETTE ... MÅSKE */
         student.firstName = getFirstName(element.fullname);
         student.lastName = getLastName(element.fullname);
         student.middleName = getMidddelName(element.fullname);
@@ -174,39 +175,25 @@ function displayList(students){
 }
 
 // Sorting 
+
 function selectSorting(event){
-    console.log("Sorting");
     const selectedSorting = event.target.dataset.sort;
     sortList(selectedSorting);
-    console.log(selectedSorting);
 }
 
 function sortList(sortBy){
     let sortedList = allStudents;
-    if (sortBy === "firstname"){
-        sortedList = sortedList.sort(sortByFirstname);
-    } else if (sortBy === "lastname"){
-        sortedList = sortedList.sort(sortByLastname);
-    } 
+    sortedList.sort(sortByProperty);
+    
+    function sortByProperty(nameA, nameB){
+        if (nameA[sortBy] < nameB[sortBy]){
+            return -1;
+        } else {
+            return 1;
+        }
+    }
     displayList(sortedList);
 }
-
-function sortByFirstname(nameA, nameB){
-    if (nameA.firstName < nameB.firstName){
-        return -1;
-    } else {
-        return 1;
-    }
-}
-
-function sortByLastname(nameA, nameB){
-    if (nameA.lastName < nameB.lastName){
-        return -1;
-    } else {
-        return 1;
-    }
-}
-
 
 function displayStudent(student){
     // Create clone
