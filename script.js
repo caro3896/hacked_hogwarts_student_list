@@ -62,8 +62,7 @@ function prepareObjects(students){
         student.middleName = getMidddelName(element.fullname);
         student.nickName = getNickName(element.fullname);
         student.image = getImage(element.fullname);
-        student.house = element.house.trim();
-        student.house = student.house.substring(0,1).toUpperCase() + student.house.substring(1).toLowerCase();
+        student.house = getHouse(element.house); 
         allStudents.push(student);
     });
     displayList(allStudents);
@@ -122,11 +121,11 @@ function getNickName(fullname){
  return nickName;
 }
 
-// function getHouse(element.house){
-//     console.log("House is:", house);
-//     house = element.house.trim();
-//     house = house.substring(0,1).toUpperCase() + house.substring(1).toLowerCase();
-// }
+function getHouse(house){
+    house = house.trim();
+    house = house.substring(0,1).toUpperCase() + house.substring(1).toLowerCase();
+    return house;
+}
 
  function getImage(fullname){
     if (lastName === 'Patil') {
