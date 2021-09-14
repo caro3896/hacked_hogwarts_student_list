@@ -85,17 +85,25 @@ function getLastName(fullname){
     lastName = fullname.trim();
     lastName = lastName.substring(lastName.lastIndexOf(" ")+1);
     lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1).toLowerCase();
+    if (fullname.includes("-")){
+        let lastNames = lastName.split("-");
+        lastNames[1] = lastNames[1].substring(0,1).toUpperCase() + lastNames[1].substring(1).toLowerCase();
+        lastName = lastNames.join('-');
+    }
     return lastName;
 }
 
 function getMidddelName(fullname){
     middleName = fullname.trim();
     middleName = middleName.split(" ");
-    if (middleName.length > 2){
-        middleName = middleName[1].toString();
+    if (middleName.length > 2) {
+        middleName = middleName[1];
         middleName = middleName.substring(0,1).toUpperCase() + middleName.substring(1).toLowerCase();
-    } else{
-        middleName = undefined;
+    } else if (middleName.includes(' "')) {
+        middleName = "";
+    } 
+    else{
+        middleName = "";
     }
     return middleName;
 }
@@ -242,7 +250,7 @@ function showDetails(student){
     popup.textContent="";
     clone.querySelector("[data-field=image]").src = student.image;
     clone.querySelector("[data-field=firstname]").textContent = `Firstname: ${student.firstName}`;
-    clone.querySelector("[data-field=middelname]").textContent = `Middelname: ${student.middelName}`;
+    clone.querySelector("[data-field=middelname]").textContent = `Middelname: ${student.middleName}`;
     clone.querySelector("[data-field=nickname]").textContent = `Nickname: ${student.nickName}`;
     clone.querySelector("[data-field=lastname]").textContent = `Lastname: ${student.lastName}`;
     clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status:`;
