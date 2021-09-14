@@ -20,13 +20,6 @@ const settings = {
     sortBy: "house"
 }
 
-let firstName;
-let middleName;
-let lastName;
-let nickName;
-let image;
-let house;
-
 function start(){
     console.log("DOM is loaded");
     loadJSON();
@@ -61,7 +54,7 @@ function prepareObjects(students){
         student.lastName = getLastName(element.fullname);
         student.middleName = getMidddelName(element.fullname);
         student.nickName = getNickName(element.fullname);
-        student.image = getImage(element.fullname);
+        student.image = getImage(student.firstName, student.lastName);
         student.house = getHouse(element.house); 
         allStudents.push(student);
     });
@@ -70,7 +63,7 @@ function prepareObjects(students){
 
 // Get firstname
 function getFirstName(fullname){
-    firstName = fullname.trim();
+    let firstName = fullname.trim();
     if (fullname.includes(" ")) {
         firstName = firstName.substring(0, firstName.indexOf(" "));
         firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase();
@@ -81,7 +74,7 @@ function getFirstName(fullname){
 }
 
 function getLastName(fullname){
-    lastName = fullname.trim();
+    let lastName = fullname.trim();
     lastName = lastName.substring(lastName.lastIndexOf(" ")+1);
     lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1).toLowerCase();
     if (fullname.includes("-")){
@@ -93,7 +86,7 @@ function getLastName(fullname){
 }
 
 function getMidddelName(fullname){
-    middleName = fullname.trim();
+    let middleName = fullname.trim();
     middleName = middleName.split(" ");
     if (fullname.includes(' "')) {
         middleName = ""; 
@@ -107,7 +100,7 @@ function getMidddelName(fullname){
 }
 
 function getNickName(fullname){
-    nickName = fullname.trim();
+    let nickName = fullname.trim();
     nickName = nickName.split(" ");
     if (fullname.includes(' "')){
         nickName = nickName[1];
@@ -123,7 +116,8 @@ function getHouse(house){
     return house;
 }
 
- function getImage(fullname){
+ function getImage(firstName, lastName){
+    let image;
     if (lastName === 'Patil') {
         image = `./images/${lastName.toLowerCase()}_${firstName.toLowerCase()}.png`;
       } else if (firstName === 'Leanne') {
