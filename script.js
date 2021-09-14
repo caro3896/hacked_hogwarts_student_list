@@ -95,29 +95,25 @@ function getLastName(fullname){
 function getMidddelName(fullname){
     middleName = fullname.trim();
     middleName = middleName.split(" ");
-    if (middleName.length > 2) {
+    if (fullname.includes(' "')) {
+        middleName = ""; 
+    } else if (middleName.length > 2) {
         middleName = middleName[1];
         middleName = middleName.substring(0,1).toUpperCase() + middleName.substring(1).toLowerCase();
-    } else if (middleName.includes(' "')) {
-        middleName = "";
-    } 
-    else{
+    } else{
         middleName = "";
     }
     return middleName;
 }
 
 function getNickName(fullname){
-    // console.log("Nickname is:", nickName);
     nickName = fullname.trim();
     nickName = nickName.split(" ");
-    // if (nickName.includes('"')){
-    //     nickName = nickName[1].toString();
-    //     console.log(nickName[1]);
-    //     nickName = nickName.substring(0,1).toUpperCase() + nickName.substring(1).toLowerCase();
-    // } else {
-    //     nickName = undefined;
-    // }
+    if (fullname.includes(' "')){
+        nickName = nickName[1];
+    } else {
+        nickName = "";
+    }
  return nickName;
 }
 
