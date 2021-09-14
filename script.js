@@ -125,6 +125,9 @@ function getNickName(fullname){
         image = `./images/${lastName.toLowerCase()}_${firstName.toLowerCase()}.png`;
       } else if (firstName === 'Leanne') {
         image = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'
+      } else if (firstName === 'Justin') {
+          lastName = lastName.split("-");
+          image = `./images/${lastName[1].toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
       }
       else {
         image = `./images/${lastName.toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
