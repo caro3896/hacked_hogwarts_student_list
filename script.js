@@ -244,6 +244,20 @@ function showDetails(student){
     clone.querySelector("[data-field=lastname]").textContent = `Lastname: ${student.lastName}`;
     clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status:`;
     clone.querySelector("[data-field=house]").textContent = `House: ${student.house}`;
+    if (student.house === "Gryffindor"){
+        popup.style.backgroundColor = "red";
+        clone.querySelector(".housecrest").style.backgroundImage = "url('./images/gryffindor.png')";    
+    } else if (student.house === "Hufflepuff"){
+        popup.style.backgroundColor = "yellow";
+        clone.querySelector(".housecrest").style.backgroundImage = "url('./images/hufflepuff.png')";
+    } else if (student.house === "Slytherin"){
+        popup.style.backgroundColor = "green";
+        clone.querySelector(".housecrest").style.backgroundImage = "url('./images/slytherin.png')";
+    } else {
+        popup.style.backgroundColor = "blue";
+        clone.querySelector(".housecrest").style.backgroundImage = "url('./images/ravenclaw.png')";
+    }
+
     popup.classList.add('active');
     overlay.classList.add('active');
     clone.querySelector("#close").addEventListener("click", closeDetails);
