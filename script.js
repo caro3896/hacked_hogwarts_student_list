@@ -64,7 +64,7 @@ function prepareObjects(students){
         student.house = getHouse(element.house); 
         allStudents.push(student);
     });
-    displayList(allStudents);
+    buildList();
 }
 
 // Get firstname from fullname
@@ -205,7 +205,7 @@ function isSquad(student){
 }
 
 function isExpelled(student){
-    return student.expell === true;
+    return student.expelled === true;
 }
 
 // Sorting 
@@ -221,7 +221,7 @@ function setSort(sortBy){
 }
 
 function sortList(sortedList){
-    sortedList.sort(sortByProperty);
+    sortedList = sortedList.sort(sortByProperty);
     
     function sortByProperty(nameA, nameB){
         if (nameA[settings.sortBy] < nameB[settings.sortBy]){
@@ -262,6 +262,7 @@ function displayStudent(student){
     //Make clickable to see more details
     clone.querySelector("[data-field=image]").addEventListener("click", () => showDetails(student));
 
+    // INQUISITORIAL SQUAD
     // Change textcontent if student is part of inquisitorial squad or not
     if (student.squad === true){
         clone.querySelector(".squad").textContent = "No squad";
@@ -274,44 +275,52 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
+        if (student.squad === true){
+            student.squad = false;
+        } else {
+            student.squad = true;
+        }
         student.squad = !student.squad;
         buildList();
     }
 
-    // Change textcontent if student is a prefect or not
+    // PREFECT
+    // // Change textcontent if student is a prefect or not
     if (student.prefect === true){
         clone.querySelector(".prefect").textContent = "No prefect";
     } else if (student.squad === false){
         clone.querySelector(".prefect").textContent = "Make prefect";
     }
 
-    // Add eventlistener to prefect
+    // // Add eventlistener to prefect
     clone.querySelector(".prefect").addEventListener("click", clickPrefect);
 
-    // Toggle prefect true or false on click
+    // // Toggle prefect true or false on click
     function clickPrefect() {
-        student.prefect = !student.prefect;
+        if (student.prefect === true) {
+            student.prefect = false;
+        } else {
+            tryToMakePrefect(student);
+        }
         buildList();
     }
 
-     // Change textcontent if student is a prefect or not
+    // EXPELLED
+    //  // Change textcontent if student is expelled or not
      if (student.expell === true){
         clone.querySelector(".expell").textContent = "Unexpell";
     } else if (student.expell === false){
         clone.querySelector(".expell").textContent = "Expell student";
     }
 
-    // Add eventlistener to prefect
+    // // Add eventlistener to prefect
     clone.querySelector(".expell").addEventListener("click", clickExpell);
 
-    // Toggle prefect true or false on click
+    // // Toggle prefect true or false on click
     function clickExpell() {
         student.expell = !student.expell;
         buildList();
     }
-
-    //Expell student
-    // clone.querySelector(".expell").addEventListener("click", () => expellOrUnExpell(expell, student));
 
     //Append clone to list
     document.querySelector("#students").appendChild(clone);
@@ -346,6 +355,75 @@ function showDetails(student){
     clone.querySelector("#close").addEventListener("click", closeDetails);
     popup.appendChild(clone);
 }
+
+function tryToMakePrefect(selectedStudent){
+    //Variable for prefects
+    const prefects = allStudents.filter(student => student.prefect);
+
+    //Variable for other prefects from same house
+    const other = prefects.filter(student => student.house === selectedStudent.house);
+    const numberOfPrefects = other.length;
+
+    //If there is two other students from the same house
+    if (numberOfPrefects >= 2){
+        console.log("There can only be two prefects from each house");
+        removeAorB(other[0], other[1]);
+        console.log(other[0]);
+        console.log(other[1]);
+    } else {
+        makePrefect(selectedStudent);
+    }
+
+    function removeAorB(prefectA, prefectB){
+        console.log(prefectA.firstName);
+        console.log(prefectB.firstName);
+
+        // Ask user to igore or remove
+        document.querySelector("#remove_AorB").classList.remove("hide");
+        document.querySelector("#remove_AorB .close_dialog").addEventListener("click", closeDialog);
+        document.querySelector("#remove_AorB #removeA").addEventListener("click", clickRemoveA);
+        document.querySelector("#remove_AorB #removeB").addEventListener("click", clickRemoveB);
+
+        // Show names on buttons
+        document.querySelector("#remove_AorB [data-field=prefectA]").textContent = `${prefectA.firstName} ${prefectA.lastName}`;
+        document.querySelector("#remove_AorB [data-field=prefectB]").textContent = `${prefectB.firstName} ${prefectB.lastName}`;
+        
+        // If ignore - do nothing
+        function closeDialog(){
+            document.querySelector("#remove_AorB").classList.add("hide");
+            document.querySelector("#remove_AorB .close_dialog").removeEventListener("click", closeDialog);
+            document.querySelector("#remove_AorB #removeA").removeEventListener("click", clickRemoveA);
+            document.querySelector("#remove_AorB #removeB").removeEventListener("click", clickRemoveB);
+        }
+
+        // If remove a
+        function clickRemoveA(){
+            removePrefect(prefectA);
+            makePrefect(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+        
+
+        // If remove b
+        function clickRemoveB(){
+            removePrefect(prefectB);
+            makePrefect(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+    }
+
+    function removePrefect(studentPrefect){
+        studentPrefect.prefect = false;
+    }
+
+    function makePrefect(student) {
+        student.prefect = true;
+
+    }
+    
+}    
 
 function closeDetails(){
     popup.classList.remove('active');

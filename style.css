@@ -103,6 +103,39 @@ button.filter:focus {
   z-index: 4;
 }
 
+/* Modal / dialog box - prefect */
+
+.hide {
+  visibility: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(40, 40, 40, 0.399);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog {
+  box-shadow: 1px 1px 10px rgb(57, 56, 56);
+  border-radius: 12px;
+  padding: 2em;
+  background-color: white;
+  position: relative;
+}
+
+.close_dialog {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 1em;
+}
+
 /* Pop-up - details */
 #popup {
   position: fixed;
