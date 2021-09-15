@@ -245,16 +245,16 @@ function showDetails(student){
     clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status:`;
     clone.querySelector("[data-field=house]").textContent = `House: ${student.house}`;
     if (student.house === "Gryffindor"){
-        popup.style.backgroundColor = "red";
+        popup.style.background = "radial-gradient(circle, rgba(251,74,74,1) 0%, rgba(210,29,29,1) 35%, rgba(158,16,16,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/gryffindor.png')";    
     } else if (student.house === "Hufflepuff"){
-        popup.style.backgroundColor = "yellow";
+        popup.style.background = "radial-gradient(circle, rgba(251,239,74,1) 0%, rgba(230,217,44,1) 35%, rgba(194,176,18,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/hufflepuff.png')";
     } else if (student.house === "Slytherin"){
-        popup.style.backgroundColor = "green";
+        popup.style.background = "radial-gradient(circle, rgba(117,183,98,1) 0%, rgba(39,146,47,1) 35%, rgba(22,78,19,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/slytherin.png')";
     } else {
-        popup.style.backgroundColor = "blue";
+        popup.style.background = "radial-gradient(circle, rgba(43,135,189,1) 0%, rgba(30,70,140,1) 35%, rgba(22,33,79,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/ravenclaw.png')";
     }
 

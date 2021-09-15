@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: rgb(42, 130, 206);
+  background-color: black;
 }
 
 h1 {
@@ -127,9 +127,10 @@ button.filter:focus {
   font-weight: bold;
   float: right;
   margin: 10px;
-  font-size: 1.5em;
+  font-size: 2em;
   border: none;
   background-color: transparent;
+  color: white;
 }
 
 #popup .image {
@@ -145,10 +146,12 @@ button.filter:focus {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  display: inline-block;
 }
 
 .infotext {
   padding: 10px 15px;
+  color: white;
 }
 
 #overlay {
