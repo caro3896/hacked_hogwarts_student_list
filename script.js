@@ -2,9 +2,10 @@
 
 window.addEventListener("DOMContentLoaded", start);
 
+// Array for all students
 let allStudents = [];
 
-// Prototype for all students
+// Prototype for a student and what it contains
 let Student = {
    firstName: "",
    lastName: "",
@@ -12,20 +13,25 @@ let Student = {
    nickName: "",
    image: "",
    house: "",
-   expelled: false
+   expelled: false,
+   prefect: false,
+   squad: false
 };
 
+// Global variables for filtering and sorting
 const settings = {
     filter: "all",
     sortBy: "house"
 }
 
+// If DOM is loaded load JSON and listen for click
 function start(){
     console.log("DOM is loaded");
     loadJSON();
     addEventListeners();
 }
 
+// Listen for click on filtering and sorting
 function addEventListeners(){
     document.querySelectorAll("[data-action='filter']").forEach(button => {
         button.addEventListener("click", selectFilter);
@@ -61,22 +67,26 @@ function prepareObjects(students){
     displayList(allStudents);
 }
 
-// Get firstname
+// Get firstname from fullname
 function getFirstName(fullname){
     let firstName = fullname.trim();
+    // If fullname includes a space, firstname is what comes before that first space
     if (fullname.includes(" ")) {
         firstName = firstName.substring(0, firstName.indexOf(" "));
         firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase();
     } else {
+        // if fullname only has one name - no space
         firstName = firstName;
     }
     return firstName;
 }
 
+// Get lastname from fullname
 function getLastName(fullname){
     let lastName = fullname.trim();
     lastName = lastName.substring(lastName.lastIndexOf(" ")+1);
     lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1).toLowerCase();
+    // If fullname contains -, make first character uppercase
     if (fullname.includes("-")){
         let lastNames = lastName.split("-");
         lastNames[1] = lastNames[1].substring(0,1).toUpperCase() + lastNames[1].substring(1).toLowerCase();
@@ -85,12 +95,14 @@ function getLastName(fullname){
     return lastName;
 }
 
+// Get middlename from fullname
 function getMidddelName(fullname){
     let middleName = fullname.trim();
     middleName = middleName.split(" ");
+    // If fullname includes "", ignore that name and make middlename none
     if (fullname.includes(' "')) {
         middleName = ""; 
-    } else if (middleName.length > 2) {
+    } else if (middleName.length > 2) { // if fullname is longer than 2, make second name middlename
         middleName = middleName[1];
         middleName = middleName.substring(0,1).toUpperCase() + middleName.substring(1).toLowerCase();
     } else{
@@ -99,9 +111,11 @@ function getMidddelName(fullname){
     return middleName;
 }
 
+// Get nickname from fullname
 function getNickName(fullname){
     let nickName = fullname.trim();
     nickName = nickName.split(" ");
+    // if fullname contains "", make second name the nickname
     if (fullname.includes(' "')){
         nickName = nickName[1];
     } else {
@@ -110,19 +124,22 @@ function getNickName(fullname){
  return nickName;
 }
 
+// Get house
 function getHouse(house){
     house = house.trim();
     house = house.substring(0,1).toUpperCase() + house.substring(1).toLowerCase();
     return house;
 }
 
+// Get image
  function getImage(firstName, lastName){
     let image;
+    // If lastname is patil, use both lastname and firstname to get image
     if (lastName === 'Patil') {
         image = `./images/${lastName.toLowerCase()}_${firstName.toLowerCase()}.png`;
-      } else if (firstName === 'Leanne') {
+      } else if (firstName === 'Leanne') { // If lastname is Leanne, show no image avaliable picture
         image = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'
-      } else if (firstName === 'Justin') {
+      } else if (firstName === 'Justin') { // If lastname is Justin, split the lastname and use second lastname
           lastName = lastName.split("-");
           image = `./images/${lastName[1].toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
       }
@@ -153,6 +170,12 @@ function filterList(filteredList){
         filteredList = allStudents.filter(isRavenclaw);
     } else if (settings.filterBy === "slytherin"){
         filteredList = allStudents.filter(isSlytherin);
+    } else if (settings.filterBy === "prefect"){
+        filteredList = allStudents.filter(isPrefect);
+    } else if (settings.filterBy === "squad"){
+        filteredList = allStudents.filter(isSquad);
+    } else if (settings.filterBy === "expelled"){
+        filteredList = allStudents.filter(isExpelled);
     }
     return filteredList;
 }
@@ -171,6 +194,18 @@ function isRavenclaw(student){
 
 function isSlytherin(student){
     return student.house === "Slytherin";
+}
+
+function isPrefect(student){
+    return student.prefect === true;
+}
+
+function isSquad(student){
+    return student.squad === true;
+}
+
+function isExpelled(student){
+    return student.expell === true;
 }
 
 // Sorting 
@@ -225,10 +260,58 @@ function displayStudent(student){
     clone.querySelector("[data-field=house]").textContent = student.house;
 
     //Make clickable to see more details
-    clone.querySelector(".studentinfo").addEventListener("click", () => showDetails(student));
+    clone.querySelector("[data-field=image]").addEventListener("click", () => showDetails(student));
+
+    // Change textcontent if student is part of inquisitorial squad or not
+    if (student.squad === true){
+        clone.querySelector(".squad").textContent = "No squad";
+    } else if (student.squad === false){
+        clone.querySelector(".squad").textContent = "Make squad";
+    }
+
+    // Add eventlistener to squad
+    clone.querySelector(".squad").addEventListener("click", clickSquad);
+
+    // Toggle squad true or false on click
+    function clickSquad() {
+        student.squad = !student.squad;
+        buildList();
+    }
+
+    // Change textcontent if student is a prefect or not
+    if (student.prefect === true){
+        clone.querySelector(".prefect").textContent = "No prefect";
+    } else if (student.squad === false){
+        clone.querySelector(".prefect").textContent = "Make prefect";
+    }
+
+    // Add eventlistener to prefect
+    clone.querySelector(".prefect").addEventListener("click", clickPrefect);
+
+    // Toggle prefect true or false on click
+    function clickPrefect() {
+        student.prefect = !student.prefect;
+        buildList();
+    }
+
+     // Change textcontent if student is a prefect or not
+     if (student.expell === true){
+        clone.querySelector(".expell").textContent = "Unexpell";
+    } else if (student.expell === false){
+        clone.querySelector(".expell").textContent = "Expell student";
+    }
+
+    // Add eventlistener to prefect
+    clone.querySelector(".expell").addEventListener("click", clickExpell);
+
+    // Toggle prefect true or false on click
+    function clickExpell() {
+        student.expell = !student.expell;
+        buildList();
+    }
 
     //Expell student
-    clone.querySelector(".expell").addEventListener("click", () => expellOrUnExpell(expell, student));
+    // clone.querySelector(".expell").addEventListener("click", () => expellOrUnExpell(expell, student));
 
     //Append clone to list
     document.querySelector("#students").appendChild(clone);
@@ -251,7 +334,7 @@ function showDetails(student){
         popup.style.background = "radial-gradient(circle, rgba(251,239,74,1) 0%, rgba(230,217,44,1) 35%, rgba(194,176,18,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/hufflepuff.png')";
     } else if (student.house === "Slytherin"){
-        popup.style.background = "radial-gradient(circle, rgba(117,183,98,1) 0%, rgba(39,146,47,1) 35%, rgba(22,78,19,1) 76%)";
+        popup.style.background = "radial-gradient(circle, rgba(75,156,51,1) 0%, rgba(27,112,33,1) 35%, rgba(21,76,18,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/slytherin.png')";
     } else {
         popup.style.background = "radial-gradient(circle, rgba(43,135,189,1) 0%, rgba(30,70,140,1) 35%, rgba(22,33,79,1) 76%)";
@@ -268,28 +351,3 @@ function closeDetails(){
     popup.classList.remove('active');
     overlay.classList.remove('active');
 }
-
-function expell(student){
-    return student.expelled = true;
-}
-
-function unExpell(student){
-    return student.expelled = false;
-}
-
-function expellOrUnExpell(action, student){
-    action(student);
-}
-
-
-// function hire(person){
-//     person.hired = true;
-// }
-
-// function fire(person){
-//     person.hired = false;
-// }
-
-// function hireOrFire(action, person){
-//     action(person);
-// }
