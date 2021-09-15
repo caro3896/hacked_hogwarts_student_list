@@ -113,7 +113,7 @@ button.filter:focus {
   border: 1px solid #decba2;
   border-radius: 10px;
   z-index: 10;
-  background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%);
+  /* background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%); */
   width: 500px;
   max-width: 80%;
 }
