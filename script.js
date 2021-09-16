@@ -265,9 +265,9 @@ function displayStudent(student){
     // INQUISITORIAL SQUAD
     // Change textcontent if student is part of inquisitorial squad or not
     if (student.squad === true){
-        clone.querySelector(".squad").textContent = "No squad";
+        clone.querySelector(".squad").classList.remove("gray");
     } else if (student.squad === false){
-        clone.querySelector(".squad").textContent = "Make squad";
+        clone.querySelector(".squad").classList.add("gray");
     }
 
     // Add eventlistener to squad
@@ -282,10 +282,8 @@ function displayStudent(student){
     // PREFECT
     // // Change textcontent if student is a prefect or not
     if (student.prefect === true){
-        // clone.querySelector(".prefect").style.backgroundImage = "url('./images/prefect.png')";
         clone.querySelector(".prefect").classList.remove("gray");
     } else if (student.squad === false){
-        // clone.querySelector(".prefect").style.backgroundImage = "url('./images/prefect.png')";
         clone.querySelector(".prefect").classList.add("gray");
     }
 
@@ -305,9 +303,9 @@ function displayStudent(student){
     // EXPELLED
     //  // Change textcontent if student is expelled or not
      if (student.expell === true){
-        clone.querySelector(".expell").textContent = "Unexpell";
+        clone.querySelector(".expell").classList.remove("gray");
     } else if (student.expell === false){
-        clone.querySelector(".expell").textContent = "Expell student";
+        clone.querySelector(".expell").classList.add("gray");
     }
 
     // // Add eventlistener to prefect
