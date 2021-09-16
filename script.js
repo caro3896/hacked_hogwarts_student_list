@@ -21,7 +21,7 @@ let Student = {
 // Global variables for filtering and sorting
 const settings = {
     filter: "all",
-    sortBy: "house"
+    sortBy: "firstName"
 }
 
 // If DOM is loaded load JSON and listen for click
@@ -236,7 +236,7 @@ function sortList(sortedList){
 function buildList(){
     const currentList = filterList(allStudents);
     const sortedList = sortList(currentList);
-
+    console.log(sortedList);
     displayList(sortedList);
 }
 
@@ -275,11 +275,6 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
-        if (student.squad === true){
-            student.squad = false;
-        } else {
-            student.squad = true;
-        }
         student.squad = !student.squad;
         buildList();
     }
@@ -368,8 +363,6 @@ function tryToMakePrefect(selectedStudent){
     if (numberOfPrefects >= 2){
         console.log("There can only be two prefects from each house");
         removeAorB(other[0], other[1]);
-        console.log(other[0]);
-        console.log(other[1]);
     } else {
         makePrefect(selectedStudent);
     }
