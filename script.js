@@ -236,7 +236,6 @@ function sortList(sortedList){
 function buildList(){
     const currentList = filterList(allStudents);
     const sortedList = sortList(currentList);
-    console.log(sortedList);
     displayList(sortedList);
 }
 
@@ -260,7 +259,7 @@ function displayStudent(student){
     clone.querySelector("[data-field=house]").textContent = student.house;
 
     //Make clickable to see more details
-    clone.querySelector("[data-field=image]").addEventListener("click", () => showDetails(student));
+    clone.querySelector("#studenttext").addEventListener("click", () => showDetails(student));
 
     // INQUISITORIAL SQUAD
     // Change textcontent if student is part of inquisitorial squad or not
@@ -302,9 +301,9 @@ function displayStudent(student){
 
     // EXPELLED
     //  // Change textcontent if student is expelled or not
-     if (student.expell === true){
+     if (student.expelled === true){
         clone.querySelector(".expell").classList.remove("gray");
-    } else if (student.expell === false){
+    } else if (student.expelled === false){
         clone.querySelector(".expell").classList.add("gray");
     }
 
@@ -313,7 +312,7 @@ function displayStudent(student){
 
     // // Toggle prefect true or false on click
     function clickExpell() {
-        student.expell = !student.expell;
+        student.expelled = !student.expelled;
         buildList();
     }
 
