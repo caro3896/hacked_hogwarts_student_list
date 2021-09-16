@@ -123,17 +123,38 @@ button.filter:focus {
 
 .dialog {
   box-shadow: 1px 1px 10px rgb(57, 56, 56);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 2em;
-  background-color: white;
+  background: rgb(49, 48, 48);
   position: relative;
+  color: white;
+}
+
+.sidebyside button {
+  margin-top: 10px;
+  border: 1px solid #decba2;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #decba2;
+  margin-right: 20px;
+}
+
+.sidebyside button:hover {
+  background-color: rgb(34, 34, 34);
+  color: white;
 }
 
 .close_dialog {
   position: absolute;
   right: 0;
   top: 0;
-  margin: 1em;
+  margin: 10px;
+  font-size: 1.2em;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 /* Pop-up - details */
