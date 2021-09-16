@@ -282,9 +282,11 @@ function displayStudent(student){
     // PREFECT
     // // Change textcontent if student is a prefect or not
     if (student.prefect === true){
-        clone.querySelector(".prefect").textContent = "No prefect";
+        // clone.querySelector(".prefect").style.backgroundImage = "url('./images/prefect.png')";
+        clone.querySelector(".prefect").classList.remove("gray");
     } else if (student.squad === false){
-        clone.querySelector(".prefect").textContent = "Make prefect";
+        // clone.querySelector(".prefect").style.backgroundImage = "url('./images/prefect.png')";
+        clone.querySelector(".prefect").classList.add("gray");
     }
 
     // // Add eventlistener to prefect
