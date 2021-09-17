@@ -27,24 +27,35 @@ h3 {
 
 /* Filtering/sorting */
 
+#navigator {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+#navigator p {
+  margin: auto 0;
+  margin-right: 20px;
+}
+
 .filtering {
   display: flex;
-  margin-left: 20px;
-}
-.filtering p {
-  color: white;
-  margin: 10px;
-  margin-left: 0;
 }
 
 .sorting {
   display: flex;
-  margin-left: 20px;
 }
-.sorting p {
+.searching {
+  margin: auto 0;
+}
+
+#searchfunction {
+  background-color: transparent;
+  border: 1px solid #decba2;
+  border-radius: 10px;
   color: white;
-  margin: 10px;
-  margin-left: 0;
+  padding: 10px;
 }
 
 button.filter {

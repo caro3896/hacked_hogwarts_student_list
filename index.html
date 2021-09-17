@@ -10,24 +10,27 @@
 <body>
 <header>
     <h1>Hogwarts student list</h1>
-    <div class="filtering">
-        <p>Filter by:</p>
-        <button class="filter" data-action="filter" data-filter="all">All</button>
-        <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-        <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
-        <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-        <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-        <button class="filter" data-action="filter" data-filter="squad">Inquisitorial Squad</button>
-        <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
-        <button class="filter" data-action="filter" data-filter="expelled">Expelled students</button>
-    <div class="sorting">
-        <p>Sort by:</p>
-        <button class="filter" data-action="sort" data-sort="firstName">Firstname</button>
-        <button class="filter" data-action="sort" data-sort="lastName">Lastname</button>
-    </div>
-    <div class="searching">
-        <input type="search" id="searchfunction">
-        <button id="search_btn">Search</button>
+    <div id="navigator">
+        <div class="filtering">
+            <p>Filter by:</p>
+            <button class="filter" data-action="filter" data-filter="all">All</button>
+            <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+            <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+            <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+            <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+            <button class="filter" data-action="filter" data-filter="squad">Inquisitorial Squad</button>
+            <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
+            <button class="filter" data-action="filter" data-filter="expelled">Expelled students</button>
+        </div>
+        <div class="sorting">
+            <p>Sort by:</p>
+            <button class="filter" data-action="sort" data-sort="firstName">Firstname</button>
+            <button class="filter" data-action="sort" data-sort="lastName">Lastname</button>
+        </div>
+        <div class="searching">
+            <input type="search" id="searchfunction" placeholder="Search...">
+            <button id="search_btn" class="filter">Search</button>
+        </div>
     </div>
 </header>
 
