@@ -234,7 +234,7 @@ function sortList(sortedList){
 }
 
 function buildList(){
-    const currentList = filterList(allStudents);
+    const currentList = filterList(allStudents.filter((student) => student.expelled === false));
     const sortedList = sortList(currentList);
     displayList(sortedList);
 }
@@ -303,6 +303,8 @@ function displayStudent(student){
     //  // Change textcontent if student is expelled or not
      if (student.expelled === true){
         clone.querySelector(".expell").classList.remove("gray");
+        clone.querySelector(".studentinfo").classList.add("gray");
+        popup.classList.add("gray");
     } else if (student.expelled === false){
         clone.querySelector(".expell").classList.add("gray");
     }
