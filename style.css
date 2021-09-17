@@ -7,10 +7,10 @@
 }
 
 body {
-  /* background: linear-gradient(0deg, rgba(9, 14, 92, 1) 0%, rgba(10, 11, 70, 1) 15%, rgba(0, 0, 0, 1) 53%); */
-  /* background-image: linear-gradient(to bottom, #000000, #090205, #0f040c, #120613, #120a19, #130e1d, #131121, #121425, #151728, #171a2b, #1a1d2f, #1d2032); */
-  /* background: linear-gradient(0deg, rgba(7, 29, 47, 1) 0%, rgba(5, 16, 38, 1) 40%, rgba(0, 0, 0, 1) 73%); */
-  background: linear-gradient(0deg, rgba(14, 31, 54, 1) 6%, rgba(10, 22, 37, 1) 64%, rgba(0, 0, 0, 1) 100%);
+  background-image: url("images/k.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Fonts */
@@ -30,10 +30,12 @@ h1 {
 
 h2 {
   font-size: 1.5em;
+  color: white;
 }
 
 h3 {
   font-size: 1.2em;
+  color: white;
 }
 
 .hogwarts {
@@ -51,6 +53,10 @@ h3 {
   color: white;
   justify-content: space-between;
   margin: 30px;
+  border-radius: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  background: linear-gradient(0deg, rgba(40, 33, 59, 1) 0%, rgba(16, 12, 29, 1) 67%, rgba(8, 8, 8, 1) 100%);
 }
 
 #navigator p {
@@ -71,29 +77,29 @@ h3 {
 
 #searchfunction {
   background-color: transparent;
-  border: 1px solid #decba2;
+  border: 1px solid white;
   border-radius: 10px;
   color: white;
   padding: 10px;
 }
 
 button.filter {
-  border: 1px solid #decba2;
+  border: 1px solid white;
   border-radius: 10px;
   cursor: pointer;
-  background-color: black;
+  background-color: transparent;
   color: white;
   padding: 10px;
   margin-right: 10px;
 }
 
 button.filter:hover {
-  background-color: #decba2;
+  background: linear-gradient(0deg, rgba(106, 128, 145, 1) 0%, rgba(82, 100, 129, 1) 67%);
   color: black;
 }
 
 button.filter:focus {
-  background-color: #decba2;
+  background: linear-gradient(0deg, rgba(106, 128, 145, 1) 0%, rgba(82, 100, 129, 1) 67%);
   color: black;
 }
 
@@ -110,10 +116,13 @@ button.filter:focus {
   width: 250px;
   height: 350px;
   margin: 0 auto;
-  border: 1px solid #decba2;
+  border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;
-  background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%);
+  background: radial-gradient(circle, rgba(40, 33, 59, 1) 0%, rgba(16, 12, 29, 1) 67%, rgba(8, 8, 8, 1) 100%);
+  /* background-image: url(images/textbox.jpg);
+  background-size: cover;
+  background-repeat: no-repeat; */
 }
 
 .name:first-child {
@@ -197,34 +206,40 @@ button.filter:focus {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(40, 40, 40, 0.399);
+  background-color: rgba(19, 19, 19, 0.502);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .dialog {
-  box-shadow: 1px 1px 10px rgb(57, 56, 56);
+  box-shadow: 1px 1px 10px rgb(0, 0, 0);
   border-radius: 10px;
   padding: 2em;
-  background: rgb(49, 48, 48);
+  background: rgb(21, 21, 21);
   position: relative;
-  color: white;
+  color: rgb(0, 0, 0);
+}
+
+.sidebyside {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .sidebyside button {
-  margin-top: 10px;
-  border: 1px solid #decba2;
+  margin-top: 20px;
+  border: 1px solid white;
+  width: 230px;
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
-  background-color: #decba2;
-  margin-right: 20px;
+  color: white;
+  background: linear-gradient(0deg, rgba(40, 33, 59, 1) 0%, rgba(16, 12, 29, 1) 67%, rgba(8, 8, 8, 1) 100%);
 }
 
 .sidebyside button:hover {
-  background-color: rgb(34, 34, 34);
-  color: white;
+  background: linear-gradient(0deg, rgba(106, 128, 145, 1) 0%, rgba(82, 100, 129, 1) 67%);
+  color: black;
 }
 
 .close_dialog {
@@ -246,7 +261,7 @@ button.filter:focus {
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
-  border: 1px solid #decba2;
+  border: 2px solid #black;
   border-radius: 10px;
   z-index: 10;
   /* background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%); */
