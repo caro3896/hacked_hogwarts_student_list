@@ -13,6 +13,7 @@ let Student = {
    nickName: "",
    image: "",
    house: "",
+   bloodStatus: "",
    expelled: false,
    prefect: false,
    squad: false
@@ -44,15 +45,18 @@ function addEventListeners(){
 
 // Load json
 async function loadJSON(){
-    const respons = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
-    const jsonData = await respons.json();
-
+    await Promise.all([fetch("https://petlatkea.dk/2021/hogwarts/students.json").then((res) => res.json()), fetch("https://petlatkea.dk/2021/hogwarts/families.json").then((res) => res.json())]).then((jsonData) => {
     // When loaded, prepare data objects
-    prepareObjects(jsonData);
+    prepareObjects(jsonData[0], jsonData[1]);   
+    });
+    // const respons = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
+    // const jsonData = await respons.json();
+
+    
 }
 
 // Prepare data objects
-function prepareObjects(students){
+function prepareObjects(students, bloodStatus){
     students.forEach(element => {
         const student = Object.create(Student);
     
@@ -62,6 +66,7 @@ function prepareObjects(students){
         student.nickName = getNickName(element.fullname);
         student.image = getImage(student.firstName, student.lastName);
         student.house = getHouse(element.house); 
+        student.bloodStatus = getBloodStatus(student.lastName, bloodStatus);
         allStudents.push(student);
     });
     buildList();
@@ -147,6 +152,18 @@ function getHouse(house){
         image = `./images/${lastName.toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
       }
      return image;
+ }
+
+ // Get bloodstatus
+ function getBloodStatus(lastName, bloodStatus) {
+     if (bloodStatus.half.includes(lastName)){
+         bloodStatus = "Half-blood";
+     } else if (bloodStatus.pure.includes(lastName)) {
+         bloodStatus = "Pure-blood";
+     } else {
+         bloodStatus = "Muggle-born";
+     }
+     return bloodStatus;
  }
 
  // Filtering
@@ -274,7 +291,11 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
-        student.squad = !student.squad;
+        if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
+            student.squad = !student.squad;
+        } else {
+            
+        }
         buildList();
     }
 
@@ -330,7 +351,7 @@ function showDetails(student){
     clone.querySelector("[data-field=middelname]").textContent = `Middelname: ${student.middleName}`;
     clone.querySelector("[data-field=nickname]").textContent = `Nickname: ${student.nickName}`;
     clone.querySelector("[data-field=lastname]").textContent = `Lastname: ${student.lastName}`;
-    clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status:`;
+    clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status: ${student.bloodStatus}`;
     clone.querySelector("[data-field=house]").textContent = `House: ${student.house}`;
     if (student.house === "Gryffindor"){
         popup.style.background = "radial-gradient(circle, rgba(251,74,74,1) 0%, rgba(210,29,29,1) 35%, rgba(158,16,16,1) 76%)";
@@ -417,7 +438,7 @@ function tryToMakePrefect(selectedStudent){
 
     }
     
-}    
+}  
 
 function closeDetails(){
     popup.classList.remove('active');
