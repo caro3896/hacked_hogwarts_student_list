@@ -7,14 +7,25 @@
 }
 
 body {
-  background-color: black;
+  /* background: linear-gradient(0deg, rgba(9, 14, 92, 1) 0%, rgba(10, 11, 70, 1) 15%, rgba(0, 0, 0, 1) 53%); */
+  /* background-image: linear-gradient(to bottom, #000000, #090205, #0f040c, #120613, #120a19, #130e1d, #131121, #121425, #151728, #171a2b, #1a1d2f, #1d2032); */
+  /* background: linear-gradient(0deg, rgba(7, 29, 47, 1) 0%, rgba(5, 16, 38, 1) 40%, rgba(0, 0, 0, 1) 73%); */
+  background: linear-gradient(0deg, rgba(14, 31, 54, 1) 6%, rgba(10, 22, 37, 1) 64%, rgba(0, 0, 0, 1) 100%);
+}
+
+/* Fonts */
+
+@font-face {
+  font-family: "harrypotter";
+  src: url("fonts/HarryP-MVZ6w.ttf");
 }
 
 h1 {
   color: white;
-  font-size: 2em;
+  font-size: 4em;
   text-align: center;
   margin: 20px;
+  font-family: "harrypotter";
 }
 
 h2 {
@@ -23,6 +34,14 @@ h2 {
 
 h3 {
   font-size: 1.2em;
+}
+
+.hogwarts {
+  display: block;
+  width: 250px;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Filtering/sorting */
