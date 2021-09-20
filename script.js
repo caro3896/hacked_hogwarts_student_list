@@ -22,7 +22,8 @@ let Student = {
 // Global variables for filtering and sorting
 const settings = {
     filter: "all",
-    sortBy: "firstName"
+    sortBy: "firstName",
+    sortDir: "asc"
 }
 
 // If DOM is loaded load JSON and listen for click
@@ -44,6 +45,7 @@ function addEventListeners(){
 
 }
 
+// CODE FOUND ONLINE
 // Load json
 async function loadJSON(){
     await Promise.all([fetch("https://petlatkea.dk/2021/hogwarts/students.json").then((res) => res.json()), fetch("https://petlatkea.dk/2021/hogwarts/families.json").then((res) => res.json())]).then((jsonData) => {
@@ -230,27 +232,51 @@ function isExpelled(student){
 
 function selectSorting(event){
     const sortBy = event.target.dataset.sort;
-    setSort(sortBy);
+    const sortDir = event.target.dataset.sortDirection;
+
+    //find old sort by element and remove sort by class
+    const oldElement = document.querySelector(`[data-sort='${settings.sortBy}'`);
+    oldElement.classList.remove("sort_by");
+
+    //indicate active sort
+    event.target.classList.add("sort_by");
+
+    //Toggle the direction
+    if (sortDir === "asc") {
+        event.target.dataset.sortDirection = "desc";
+    } else {
+        event.target.dataset.sortDirection = "asc";
+    }
+    setSort(sortBy, sortDir);
 }
 
-function setSort(sortBy){
+function setSort(sortBy, sortDir){
     settings.sortBy = sortBy;
+    settings.sortDir = sortDir;
     buildList();
 }
 
 function sortList(sortedList){
+    let direction = 1;
+    if (settings.sortDir === "desc"){
+        direction = -1;
+    } else {
+        direction = 1;
+    }
     sortedList = sortedList.sort(sortByProperty);
     
+
     function sortByProperty(nameA, nameB){
         if (nameA[settings.sortBy] < nameB[settings.sortBy]){
-            return -1;
+            return -1 * direction;
         } else {
-            return 1;
+            return 1 * direction;
         }
     }
     return sortedList;
 }
 
+// CODE FOUND ONLINE
 // Searching
 function search(){
     const searchWord = document.querySelector("#searchfunction").value.toLowerCase();

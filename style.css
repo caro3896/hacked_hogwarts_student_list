@@ -71,6 +71,13 @@ h3 {
 .sorting {
   display: flex;
 }
+
+.sort_by {
+  background: linear-gradient(0deg, rgba(106, 128, 145, 1) 0%, rgba(82, 100, 129, 1) 67%);
+  color: black;
+  text-decoration: underline;
+}
+
 .searching {
   margin: auto 0;
 }
@@ -96,6 +103,7 @@ button.filter {
 button.filter:hover {
   background: linear-gradient(0deg, rgba(106, 128, 145, 1) 0%, rgba(82, 100, 129, 1) 67%);
   color: black;
+  text-decoration: underline;
 }
 
 button.filter:focus {
