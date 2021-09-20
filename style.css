@@ -78,6 +78,14 @@ h3 {
   text-decoration: underline;
 }
 
+.sort_by[data-sort-direction="asc"]::after {
+  content: "▲";
+}
+
+.sort_by[data-sort-direction="desc"]::after {
+  content: "▼";
+}
+
 .searching {
   margin: auto 0;
 }
