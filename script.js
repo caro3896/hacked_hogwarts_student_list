@@ -302,6 +302,9 @@ function displayList(students){
 
     // Build a new list
     students.forEach(displayStudent);
+
+    // Show number of students
+    document.querySelector("#student_number").textContent = `Number of students: ${students.length}`;
 }
 
 function displayStudent(student){
@@ -392,6 +395,8 @@ function showDetails(student){
     clone.querySelector("[data-field=lastname]").textContent = `Lastname: ${student.lastName}`;
     clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status: ${student.bloodStatus}`;
     clone.querySelector("[data-field=house]").textContent = `House: ${student.house}`;
+    
+    
     if (student.house === "Gryffindor"){
         popup.style.background = "radial-gradient(circle, rgba(251,74,74,1) 0%, rgba(210,29,29,1) 35%, rgba(158,16,16,1) 76%)";
         clone.querySelector(".housecrest").style.backgroundImage = "url('./images/gryffindor.png')";    
