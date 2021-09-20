@@ -26,6 +26,9 @@ const settings = {
     sortDir: "asc"
 }
 
+// Global variable for hacking the system
+let hackedSystem = false;
+
 // If DOM is loaded load JSON and listen for click
 function start(){
     console.log("DOM is loaded");
@@ -42,7 +45,7 @@ function addEventListeners(){
         button.addEventListener("click", selectSorting);
     })
     document.querySelector("#searchfunction").addEventListener("input", search);
-
+    document.querySelector(".hogwarts").addEventListener("click", hackTheSystem);
 }
 
 // CODE FOUND ONLINE
@@ -372,10 +375,10 @@ function displayStudent(student){
         clone.querySelector(".expell").classList.add("gray");
     }
 
-    // // Add eventlistener to prefect
+    // // Add eventlistener to expell
     clone.querySelector(".expell").addEventListener("click", clickExpell);
 
-    // // Toggle prefect true or false on click
+    // // Toggle expell true or false on click
     function clickExpell() {
         student.expelled = !student.expelled;
         buildList();
@@ -427,7 +430,6 @@ function tryToMakePrefect(selectedStudent){
 
     //If there is two other students from the same house
     if (numberOfPrefects >= 2){
-        console.log("There can only be two prefects from each house");
         removeAorB(other[0], other[1]);
     } else {
         makePrefect(selectedStudent);
@@ -487,4 +489,53 @@ function tryToMakePrefect(selectedStudent){
 function closeDetails(){
     popup.classList.remove('active');
     overlay.classList.remove('active');
+}
+
+// Hacking the system 
+
+function hackTheSystem(){
+    hackedSystem = true;
+    document.querySelector(".hogwarts").removeEventListener("click", hackTheSystem);
+    console.log("The system is hacked", hackedSystem);
+
+    injectMyself();
+
+    randomBloodStatus();
+
+    limitedSquad(student);
+
+}
+
+function injectMyself(){
+    const me = {
+        firstName: "Caroline",
+        lastName: "Juhl",
+        middleName: "Ragnholm",
+        nickName: "Caro",
+        image: "./images/squad.png",
+        house: "Hufflepuff",
+        bloodStatus: "Muggle-born",
+        expelled: false,
+        prefect: false,
+        squad: false
+    }
+    allStudents.push(me);
+    buildList();
+}
+
+function randomBloodStatus(){
+
+}
+
+function limitedSquad(student){
+    console.log("limited squad");
+    if (allStudents.some((student) => student.squad === true)){
+        console.log("helloe");
+        setTimeout(() => {
+            console.log("remove squad");
+            student.squad = false;
+            console.table(allStudents);
+            buildList();
+        }, 2000);
+    } 
 }

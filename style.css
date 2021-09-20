@@ -337,3 +337,8 @@ button.filter:focus {
   opacity: 1;
   pointer-events: all;
 }
+
+/* Hacking */
+.hogwarts {
+  cursor: pointer;
+}
