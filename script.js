@@ -40,6 +40,7 @@ function addEventListeners(){
     document.querySelectorAll("[data-action='sort']").forEach(button => {
         button.addEventListener("click", selectSorting);
     })
+    document.querySelector("#searchfunction").addEventListener("input", search);
 
 }
 
@@ -248,6 +249,18 @@ function sortList(sortedList){
         }
     }
     return sortedList;
+}
+
+// Searching
+function search(){
+    const searchWord = document.querySelector("#searchfunction").value.toLowerCase();
+    const filteredSearch = allStudents.filter((student) => {
+        return (
+            student.firstName.toLowerCase().includes(searchWord) ||
+            student.lastName.toLowerCase().includes(searchWord)
+        );
+    });
+    displayList(filteredSearch);
 }
 
 function buildList(){
