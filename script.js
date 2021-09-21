@@ -57,9 +57,6 @@ async function loadJSON(){
         .then((jsonData) => {
             // When loaded, prepare data objects
             prepareObjects(jsonData[0], jsonData[1]);  
-            
-    console.log(jsonData[0]);
-    console.log(jsonData[1]); 
         });
     // const respons = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
     // const jsonData = await respons.json();
@@ -341,7 +338,10 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
-        if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
+        if (theSystemIsHacked === true) {
+            student.squad = true;
+            limitedSquad();
+        } else if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
             student.squad = !student.squad;
         } else {
             canNotBeSquad();
@@ -536,7 +536,7 @@ function hackTheSystem(){
 
     randomBloodStatus();
 
-    // limitedSquad();
+    limitedSquad();
 
 }
 
@@ -563,7 +563,6 @@ function randomBloodStatus(){
             student.bloodStatus = "Pure-blood";
         } else {
             student.bloodStatus = Math.floor(Math.random() * 3);
-            console.log(student.bloodStatus);
             if (student.bloodStatus == 0){
                 student.bloodStatus = "Muggle-born";
             } else if (student.bloodStatus == 1){
@@ -573,52 +572,17 @@ function randomBloodStatus(){
             }
         }
     });
-    
 }
 
-// function getRandomInt(max){
-//    return 
-// }
-
-// function limitedSquad(student) {
-//     console.log("limitedSquad");
-//     if (student.squad === true) {
-//       setTimeout(() => {
-//         student.squad = false;
-//         buildList();
-//       }, 3000);
-//     }
-//   }
-
-// function limitedSquad(student){
-//     console.log("limited squad");
-//     if ()
-    
-    // if (allStudents.some((student) => student.squad === true)){
-    //     console.log("hello");
-    //     allStudents.forEach(student => setTimeout() => {
-    //         student.squad = false;
-    //         buildList();
-    //     }, 3000);
-
-
-    //     setTimeout(() => {
-    //         allStudents.forEach(student => student.squad = false);
-    //         buildList();
-    //     }, 3000);
-    //     console.table(allStudents);
-    // }
-// }
-    // if (allStudents.some((student) => student.squad === true)){
-    //     console.log("helloe",student);
-    //     allStudents.forEach(student => student.squad = false);
-    //     console.table(allStudents);
-
-        // setTimeout(() => {
-        //     console.log("remove squad");
-        //     student.squad = false;
-        //     console.table(allStudents);
-        //     buildList();
-        // }, 2000);
-//     } 
-// }
+function limitedSquad(){
+    console.log("Limit time on squad");
+    allStudents.forEach(student => {
+        if (student.squad === true){
+            console.log("student is squad");
+            setTimeout(() => {
+                student.squad = false;
+                buildList();
+            }, 3000);
+        }
+    });
+}
