@@ -336,6 +336,9 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
+        if (hackedSystem === true) {
+            limitedSquad(student);
+        }
         if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
             student.squad = !student.squad;
         } else {
@@ -502,7 +505,7 @@ function hackTheSystem(){
 
     randomBloodStatus();
 
-    limitedSquad(student);
+    // limitedSquad(student);
 
 }
 
@@ -529,13 +532,24 @@ function randomBloodStatus(){
 
 function limitedSquad(student){
     console.log("limited squad");
-    if (allStudents.some((student) => student.squad === true)){
-        console.log("helloe");
+    if (student.squad === true){
         setTimeout(() => {
-            console.log("remove squad");
             student.squad = false;
-            console.table(allStudents);
             buildList();
-        }, 2000);
-    } 
+        }, 3000);
+        console.table(allStudents);
+    }
 }
+    // if (allStudents.some((student) => student.squad === true)){
+    //     console.log("helloe",student);
+    //     allStudents.forEach(student => student.squad = false);
+    //     console.table(allStudents);
+
+        // setTimeout(() => {
+        //     console.log("remove squad");
+        //     student.squad = false;
+        //     console.table(allStudents);
+        //     buildList();
+        // }, 2000);
+//     } 
+// }
