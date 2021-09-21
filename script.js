@@ -27,7 +27,7 @@ const settings = {
 }
 
 // Global variable for hacking the system
-let hackedSystem = false;
+let theSystemIsHacked = false;
 
 // If DOM is loaded load JSON and listen for click
 function start(){
@@ -51,10 +51,13 @@ function addEventListeners(){
 // CODE FOUND ONLINE
 // Load json
 async function loadJSON(){
-    await Promise.all([fetch("https://petlatkea.dk/2021/hogwarts/students.json").then((res) => res.json()), fetch("https://petlatkea.dk/2021/hogwarts/families.json").then((res) => res.json())]).then((jsonData) => {
-    // When loaded, prepare data objects
-    prepareObjects(jsonData[0], jsonData[1]);   
-    });
+    await Promise.all([fetch("https://petlatkea.dk/2021/hogwarts/students.json")
+        .then((res) => res.json()), fetch("https://petlatkea.dk/2021/hogwarts/families.json")
+        .then((res) => res.json())])
+        .then((jsonData) => {
+            // When loaded, prepare data objects
+            prepareObjects(jsonData[0], jsonData[1]);   
+        });
     // const respons = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
     // const jsonData = await respons.json();
 
@@ -336,9 +339,6 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
-        // if (hackedSystem === true) {
-        //     limitedSquad(student);
-        // }
         if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
             student.squad = !student.squad;
         } else {
@@ -371,7 +371,8 @@ function displayStudent(student){
     // EXPELLED
     //  // Change textcontent if student is expelled or not
      if (student.expelled === true){
-        clone.querySelector(".studentinfo").classList.add("gray");
+        clone.querySelector("#studenttext").classList.add("gray");
+        clone.querySelector(".expell").classList.remove("gray");
         popup.classList.add("gray");
         // Remove prefect and squad status if student gets expelled
         student.prefect = false;
@@ -385,7 +386,12 @@ function displayStudent(student){
 
     // // Toggle expell true or false on click
     function clickExpell() {
-        student.expelled = !student.expelled;
+        if (student.firstName === "Caroline"){
+            student.expelled = false;
+            canNotExpell();
+        } else {
+            student.expelled = !student.expelled;
+        }
         buildList();
     }
 
@@ -505,18 +511,30 @@ function closeDetails(){
     overlay.classList.remove('active');
 }
 
+function canNotExpell(){
+    // Show modal
+    document.querySelector("#cant_be_expelled").classList.remove("hide");
+    document.querySelector("#cant_be_expelled .close_dialog").addEventListener("click", closeDialog);
+
+    // Close modal
+    function closeDialog(){
+        document.querySelector("#cant_be_expelled").classList.add("hide");
+        document.querySelector("#cant_be_expelled .close_dialog").removeEventListener("click", closeDialog);
+    }
+}
+
 // Hacking the system 
 
 function hackTheSystem(){
-    hackedSystem = true;
+    theSystemIsHacked = true;
     document.querySelector(".hogwarts").removeEventListener("click", hackTheSystem);
-    console.log("The system is hacked", hackedSystem);
+    console.log("The system is hacked", theSystemIsHacked);
 
     injectMyself();
 
     randomBloodStatus();
 
-    // limitedSquad(student);
+    // limitedSquad();
 
 }
 
@@ -541,16 +559,35 @@ function randomBloodStatus(){
 
 }
 
-function limitedSquad(student){
-    console.log("limited squad");
-    if (student.squad === true){
-        setTimeout(() => {
-            student.squad = false;
-            buildList();
-        }, 3000);
-        console.table(allStudents);
-    }
-}
+// function limitedSquad(student) {
+//     console.log("limitedSquad");
+//     if (student.squad === true) {
+//       setTimeout(() => {
+//         student.squad = false;
+//         buildList();
+//       }, 3000);
+//     }
+//   }
+
+// function limitedSquad(student){
+//     console.log("limited squad");
+//     if ()
+    
+    // if (allStudents.some((student) => student.squad === true)){
+    //     console.log("hello");
+    //     allStudents.forEach(student => setTimeout() => {
+    //         student.squad = false;
+    //         buildList();
+    //     }, 3000);
+
+
+    //     setTimeout(() => {
+    //         allStudents.forEach(student => student.squad = false);
+    //         buildList();
+    //     }, 3000);
+    //     console.table(allStudents);
+    // }
+// }
     // if (allStudents.some((student) => student.squad === true)){
     //     console.log("helloe",student);
     //     allStudents.forEach(student => student.squad = false);
