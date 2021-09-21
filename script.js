@@ -371,9 +371,11 @@ function displayStudent(student){
     // EXPELLED
     //  // Change textcontent if student is expelled or not
      if (student.expelled === true){
-        clone.querySelector(".expell").classList.remove("gray");
         clone.querySelector(".studentinfo").classList.add("gray");
         popup.classList.add("gray");
+        // Remove prefect and squad status if student gets expelled
+        student.prefect = false;
+        student.squad = false;
     } else if (student.expelled === false){
         clone.querySelector(".expell").classList.add("gray");
     }
