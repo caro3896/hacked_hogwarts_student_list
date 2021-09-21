@@ -56,12 +56,14 @@ async function loadJSON(){
         .then((res) => res.json())])
         .then((jsonData) => {
             // When loaded, prepare data objects
-            prepareObjects(jsonData[0], jsonData[1]);   
+            prepareObjects(jsonData[0], jsonData[1]);  
+            
+    console.log(jsonData[0]);
+    console.log(jsonData[1]); 
         });
     // const respons = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
     // const jsonData = await respons.json();
 
-    
 }
 
 // Prepare data objects
@@ -556,8 +558,27 @@ function injectMyself(){
 }
 
 function randomBloodStatus(){
-
+    allStudents.forEach(student => {
+        if (student.bloodStatus === "Half-blood" || student.bloodStatus === "Muggle-born"){
+            student.bloodStatus = "Pure-blood";
+        } else {
+            student.bloodStatus = Math.floor(Math.random() * 3);
+            console.log(student.bloodStatus);
+            if (student.bloodStatus == 0){
+                student.bloodStatus = "Muggle-born";
+            } else if (student.bloodStatus == 1){
+                student.bloodStatus = "Half-blood";
+            } else {
+                student.bloodStatus = "Pure-blood";
+            }
+        }
+    });
+    
 }
+
+// function getRandomInt(max){
+//    return 
+// }
 
 // function limitedSquad(student) {
 //     console.log("limitedSquad");
