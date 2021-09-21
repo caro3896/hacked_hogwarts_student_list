@@ -336,13 +336,13 @@ function displayStudent(student){
 
     // Toggle squad true or false on click
     function clickSquad() {
-        if (hackedSystem === true) {
-            limitedSquad(student);
-        }
+        // if (hackedSystem === true) {
+        //     limitedSquad(student);
+        // }
         if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
             student.squad = !student.squad;
         } else {
-            
+            canNotBeSquad();
         }
         buildList();
     }
@@ -439,9 +439,6 @@ function tryToMakePrefect(selectedStudent){
     }
 
     function removeAorB(prefectA, prefectB){
-        console.log(prefectA.firstName);
-        console.log(prefectB.firstName);
-
         // Ask user to igore or remove
         document.querySelector("#remove_AorB").classList.remove("hide");
         document.querySelector("#remove_AorB .close_dialog").addEventListener("click", closeDialog);
@@ -488,6 +485,18 @@ function tryToMakePrefect(selectedStudent){
     }
     
 }  
+
+function canNotBeSquad(){
+    // Show modal
+    document.querySelector("#cant_be_squad").classList.remove("hide");
+    document.querySelector("#cant_be_squad .close_dialog").addEventListener("click", closeDialog);
+
+    // Close modal
+    function closeDialog(){
+        document.querySelector("#cant_be_squad").classList.add("hide");
+        document.querySelector("#cant_be_squad .close_dialog").removeEventListener("click", closeDialog);
+    }
+}
 
 function closeDetails(){
     popup.classList.remove('active');
