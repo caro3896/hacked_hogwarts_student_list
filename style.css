@@ -49,27 +49,46 @@ h3 {
 /* Filtering/sorting */
 
 #navigator {
-  display: flex;
-  color: white;
-  justify-content: space-between;
-  margin: 30px;
-  border-radius: 1px solid black;
+  background: linear-gradient(0deg, rgba(40, 33, 59, 1) 0%, rgba(16, 12, 29, 1) 67%, rgba(8, 8, 8, 1) 100%);
+  border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
-  background: linear-gradient(0deg, rgba(40, 33, 59, 1) 0%, rgba(16, 12, 29, 1) 67%, rgba(8, 8, 8, 1) 100%);
+  margin: 30px;
+  color: white;
+}
+
+#navigator button {
+  margin-bottom: 10px;
 }
 
 #navigator p {
-  margin: auto 0;
-  margin-right: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
-.filtering {
-  display: flex;
-}
+@media (min-width: 1400px) {
+  #navigator {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+  }
 
-.sorting {
-  display: flex;
+  #navigator button {
+    margin-bottom: 0;
+  }
+
+  #navigator p {
+    margin: auto 0;
+    margin-right: 8px;
+  }
+
+  .filtering {
+    display: flex;
+  }
+
+  .sorting {
+    display: flex;
+  }
 }
 
 .sort_by {
