@@ -12,7 +12,6 @@
     <img class="hogwarts" src="images/hogwarts.png" alt="hogwarts crest">
     <h1>Hogwarts student list</h1>
     <div id="navigator">
-        <p id="student_number">Number of students:</p>
         <div class="filtering">
             <p>Filter by:</p>
             <button class="filter" data-action="filter" data-filter="all">All</button>
@@ -24,6 +23,7 @@
             <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
             <button class="filter" data-action="filter" data-filter="expelled">Expelled students</button>
         </div>
+        <p id="student_number">Number of students:</p>
         <div class="sorting">
             <p>Sort by:</p>
             <button class="filter" data-action="sort" data-sort-direction="asc" data-sort="firstName">Firstname</button>
@@ -66,6 +66,8 @@
         <p class="infotext" data-field="lastname"></p>
         <p class="infotext" data-field="bloodstatus"></p>
         <p class="infotext" data-field="house"></p>
+        <p class = infotext data-field="prefect"></p>
+        <p class = infotext data-field="prefect"></p>
     </template>
 
     <div id="remove_AorB" class="modal hide">

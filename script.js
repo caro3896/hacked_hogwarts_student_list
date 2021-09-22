@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", start);
 
 // Array for all students
 let allStudents = [];
+let filteredStudents = allStudents;
 
 // Prototype for a student and what it contains
 let Student = {
@@ -188,17 +189,17 @@ function setFilter(filter){
 function filterList(filteredList){
 
     if (settings.filterBy === "gryffindor"){
-        filteredList = allStudents.filter(isGryffindor);
+        filteredList = filteredStudents.filter(isGryffindor);
     } else if (settings.filterBy === "hufflepuff"){
-        filteredList = allStudents.filter(isHufflepuff);
+        filteredList = filteredStudents.filter(isHufflepuff);
     } else if (settings.filterBy === "ravenclaw"){
-        filteredList = allStudents.filter(isRavenclaw);
+        filteredList = filteredStudents.filter(isRavenclaw);
     } else if (settings.filterBy === "slytherin"){
-        filteredList = allStudents.filter(isSlytherin);
+        filteredList = filteredStudents.filter(isSlytherin);
     } else if (settings.filterBy === "prefect"){
-        filteredList = allStudents.filter(isPrefect);
+        filteredList = filteredStudents.filter(isPrefect);
     } else if (settings.filterBy === "squad"){
-        filteredList = allStudents.filter(isSquad);
+        filteredList = filteredStudents.filter(isSquad);
     } else if (settings.filterBy === "expelled"){
         filteredList = allStudents.filter(isExpelled);
     }
@@ -281,7 +282,6 @@ function sortList(sortedList){
     return sortedList;
 }
 
-// CODE FOUND ONLINE
 // Searching
 function search(){
     const searchWord = document.querySelector("#searchfunction").value.toLowerCase();
@@ -295,9 +295,11 @@ function search(){
 }
 
 function buildList(){
-    const currentList = filterList(allStudents.filter((student) => student.expelled === false));
+    filteredStudents = allStudents.filter((student) => student.expelled === false);
+    console.log(filteredStudents);
+    const currentList = filterList(filteredStudents);
     const sortedList = sortList(currentList);
-    displayList(sortedList);
+    displayList(currentList);
 }
 
 // Displaying filtered list
@@ -374,7 +376,8 @@ function displayStudent(student){
     //  // Change textcontent if student is expelled or not
      if (student.expelled === true){
         clone.querySelector("#studenttext").classList.add("gray");
-        clone.querySelector(".expell").classList.remove("gray");
+        clone.querySelector(".prefect").classList.remove("prefect:hover")
+        clone.querySelector(".studentinfo").style.background = "black";
         popup.classList.add("gray");
         // Remove prefect and squad status if student gets expelled
         student.prefect = false;
@@ -411,7 +414,16 @@ function showDetails(student){
     clone.querySelector("[data-field=lastname]").textContent = `Lastname: ${student.lastName}`;
     clone.querySelector("[data-field=bloodstatus]").textContent = `Blood status: ${student.bloodStatus}`;
     clone.querySelector("[data-field=house]").textContent = `House: ${student.house}`;
-    
+    if (student.prefect === true){
+        clone.querySelector("[data-field=prefect]").textContent = `Prefect: Yes`;
+    } else {
+        clone.querySelector("[data-field=prefect]").textContent = `Prefect: No`;
+    }
+    if (student.squad === true) {
+        clone.querySelector("[data-field=squad]").textContent = `Inquisitorial squad: Yes`;
+    } else {
+        clone.querySelector("[data-field=squad]").textContent = `Inquisitorial squad: No`;
+    }
     
     if (student.house === "Gryffindor"){
         popup.style.background = "radial-gradient(circle, rgba(251,74,74,1) 0%, rgba(210,29,29,1) 35%, rgba(158,16,16,1) 76%)";

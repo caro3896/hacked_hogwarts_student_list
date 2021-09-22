@@ -136,9 +136,6 @@ button.filter:focus {
   border-radius: 10px;
   cursor: pointer;
   background: radial-gradient(circle, rgba(40, 33, 59, 1) 0%, rgba(16, 12, 29, 1) 67%, rgba(8, 8, 8, 1) 100%);
-  /* background-image: url(images/textbox.jpg);
-  background-size: cover;
-  background-repeat: no-repeat; */
 }
 
 .name:first-child {
@@ -235,6 +232,7 @@ button.filter:focus {
   background: rgb(21, 21, 21);
   position: relative;
   color: rgb(0, 0, 0);
+  border: 1px solid white;
 }
 
 .sidebyside {
@@ -277,12 +275,13 @@ button.filter:focus {
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
-  border: 2px solid #black;
+  border: 2px solid black;
   border-radius: 10px;
   z-index: 10;
-  /* background: linear-gradient(135deg, #786d57 0%, #decba2 62%, #e8e0c5 100%); */
   width: 500px;
   max-width: 80%;
+  padding: 10px;
+  padding-top: 0;
 }
 
 #popup.active {
@@ -302,7 +301,6 @@ button.filter:focus {
 
 #popup .image {
   display: block;
-  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
 }
