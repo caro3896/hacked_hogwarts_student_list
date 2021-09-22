@@ -197,6 +197,7 @@ button.filter:focus {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  color: white;
 }
 
 .expell:hover {
