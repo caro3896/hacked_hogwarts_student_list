@@ -296,7 +296,6 @@ function search(){
 
 function buildList(){
     filteredStudents = allStudents.filter((student) => student.expelled === false);
-    console.log(filteredStudents);
     const currentList = filterList(filteredStudents);
     const sortedList = sortList(currentList);
     displayList(currentList);
@@ -339,11 +338,11 @@ function displayStudent(student){
     clone.querySelector(".squad").addEventListener("click", clickSquad);
 
     // Toggle squad true or false on click
-    function clickSquad() {
-        if (theSystemIsHacked === true) {
+    function clickSquad() { 
+        if (theSystemIsHacked === true && student.house === "Slytherin" && student.bloodStatus === "Pure-blood" ) {
             student.squad = true;
             limitedSquad();
-        } else if (student.house === "Slytherin" || student.bloodStatus === "Pure-blood"){
+        } else if (student.house === "Slytherin" && student.bloodStatus === "Pure-blood"){
             student.squad = !student.squad;
         } else {
             canNotBeSquad();
@@ -548,7 +547,7 @@ function canNotExpell(){
 function hackTheSystem(){
     theSystemIsHacked = true;
     document.querySelector(".hogwarts").removeEventListener("click", hackTheSystem);
-    console.log("The system is hacked", theSystemIsHacked);
+    document.querySelector(".hogwarts").classList.add("hanging");
 
     injectMyself();
 
@@ -593,10 +592,8 @@ function randomBloodStatus(){
 }
 
 function limitedSquad(){
-    console.log("Limit time on squad");
     allStudents.forEach(student => {
         if (student.squad === true){
-            console.log("student is squad");
             setTimeout(() => {
                 student.squad = false;
                 buildList();

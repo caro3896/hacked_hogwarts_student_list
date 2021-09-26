@@ -360,3 +360,52 @@ button.filter:focus {
 .hogwarts {
   cursor: pointer;
 }
+
+/* .hogwarts:hover {
+  animation-play-state: paused;
+} */
+
+.pulse {
+  animation-name: pulse_kf;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+@keyframes pulse_kf {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* hangAndDropLeft animation keyframes */
+
+.hanging {
+  animation-name: hanging_kf;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes hanging_kf {
+  from {
+    transform-origin: top left;
+  }
+  40% {
+    transform: rotate(60deg);
+    transform-origin: top left;
+  }
+  75% {
+    transform: rotate(20deg);
+    transform-origin: top left;
+  }
+  to {
+    transform: rotate(30deg);
+    transform-origin: top left;
+  }
+}
